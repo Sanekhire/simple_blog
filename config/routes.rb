@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  root 'articles#index'
+  root 'pages#index'
   resources :articles do
-    resources :comments, except: %i(new show)
+    resources :comments, except: %i[new show]
   end
 end

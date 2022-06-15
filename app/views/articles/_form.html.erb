@@ -1,0 +1,23 @@
+<%= render 'shared/errors', object: @article %>
+
+<%= form_with model: @article do |f| %>
+
+
+<div>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+<p></p>
+
+<div>
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+</div>
+<p></p>
+
+<div>
+  <%= f.submit  'Submit article'%>
+</div>
+ 
+ <% end %>
+ 

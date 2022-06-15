@@ -1,36 +1,37 @@
+# frozen_string_literal: true
+
 class ArticlesController < ApplicationController
-before_action :set_article, only: %i[show edit destroy]
-  
-  def index 
-      @articles = Article.all
+  before_action :set_article, only: %i[show edit destroy update]
+
+  def index
+    @articles = Article.order(created_at: :desc)
   end
 
   def show
     @comment = @article.comments.build
-    @comments = Comment.order(created_at: :desc)
+    @comments = @article.comments.order(created_at: :desc)
   end
 
   def new
     @article = Article.new
   end
 
-  def create 
+  def create
     @article = Article.new(articles_params)
-    if @article.save 
-      flash[:success] = 'Artcile created'
+    if @article.save
+      flash[:success] = 'Artcile created!'
       redirect_to articles_path
     else
       render :new
     end
   end
-  
-  def edit 
-  end
 
-  def update 
-    if article.update(articles_params)
-      flash[:success] = 'Artcile updated'
-      redirect_to articles_path
+  def edit; end
+
+  def update
+    if @article.update(articles_params)
+      flash[:success] = 'Artcile updated!'
+      redirect_to article_path(@article)
     else
       render :edit
     end
@@ -38,7 +39,7 @@ before_action :set_article, only: %i[show edit destroy]
 
   def destroy
     @article.destroy
-    flash[:success] = 'Article deleted'
+    flash[:success] = 'Article deleted!'
     redirect_to articles_path
   end
 
@@ -51,6 +52,4 @@ before_action :set_article, only: %i[show edit destroy]
   def set_article
     @article = Article.find(params[:id])
   end
-
-
 end

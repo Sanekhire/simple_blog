@@ -1,0 +1,20 @@
+<%= render 'shared/errors', object: @comment %>
+
+<%= form_with model: [@article, @comment] do |f| %>
+
+
+<div>
+  <%= f.label :body %>
+</div>
+  
+  <div>  
+  <%= f.text_area :body, required: true %>
+</div>
+<p></p>
+
+<div>
+  <%= f.submit  'Submit comment'%>
+</div>
+ 
+ <% end %>
+ 
